@@ -1,27 +1,42 @@
 import { Text, View, ScrollView, Button, Pressable, TouchableOpacity } from "react-native";
-import { Link, router } from "expo-router";
+import { CameraView, useCameraPermissions } from 'expo-camera/next';
+//import { Link, router } from "expo-router";
 import { globalStyles } from "../../styles/global";
-import { COLORS } from "../../styles/constants";
 import { Typography } from "../../components/Typography";
 import { LoginText } from "../../components/LoginText";
-import { StyledButton } from "../../components/StyledButton";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
-import { CameraView, useCameraPermissions } from 'expo-camera/next';
 
 export default function HomePage() {
 
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
-  const [promo, setPromo] = useState('');
-  
+  const [promo, setPromo] = useState('none');
+  const [boolOutForPromo, setOutForPromo] = useState(false);
+
+  const { user, setUserPromo, delUserPromo } = useContext(UserContext);
+  const header_var = (<Typography variant="heading">Book Order</Typography>);
+
+  useEffect(() => {
+    if(user!=null){
+      if(user.promoactive==true){
+        setOutForPromo(true)
+      }else{
+        setOutForPromo(false)
+      }
+      setPromo('none')
+    }else{
+      setOutForPromo(false)
+      setPromo('none')
+    }
+  },[user]);
 
   if (!permission){
-    alert('Permisson problem');
+    //alert('Permisson problem');
     return <></>;
   }
 
-  if (!permission.granted){
+  if ( (permission && !permission.granted) || !permission){
     return (
       <View style={globalStyles.container}>
         <Text>Camera permission is required</Text>
@@ -53,9 +68,10 @@ export default function HomePage() {
     }    
   }
 
-  const { user } = useContext(UserContext);
- // console.log("user", user);
-  const header_var = (<Typography variant="heading">Book Order</Typography>);
+  function sendPromo(promo){
+    //alert(promo)
+    setUserPromo(promo)
+  }
 
   if(user==null){
     return (
@@ -64,20 +80,72 @@ export default function HomePage() {
           <LoginText />
       </ScrollView>
     )
+
+  }else if(promo=='none'){
+
+    return (
+      <View style={globalStyles.container}>
+          {
+            boolOutForPromo===true?(
+            <Text>
+                You have applied Promo Code now. If You want have another Promo You can:
+            </Text>):''
+          }
+          <Pressable
+            onPress={()=>setPromo('')}
+            style={globalStyles.button20}
+          >
+              <Text>
+                Scan new Promo code
+              </Text>
+          </Pressable>
+          {boolOutForPromo===true?(
+            <>
+              <Text>
+                Or:
+              </Text>
+              <Pressable
+                  onPress={()=>delUserPromo()}
+                  style={globalStyles.button20}
+                >
+                  <Text>
+                    Remove Promo code
+                  </Text>
+              </Pressable>
+            </>):''
+          }
+
+      </View>    
+    )
   }else if(promo!=''){
 
-    console.log(promo+100)
+//    console.log(promo+100)
     
-    return <><Text>{promo}</Text>
-            <Pressable
-                onPress={()=>setPromo('')}
-                style={globalStyles.button20}
-              >
-                <Text>
-                  Rescan
-                </Text>
-              </Pressable>
-            </>
+    return (
+        <View style={globalStyles.container}>
+              
+          <Pressable
+            onPress={()=>setPromo('')}
+            style={globalStyles.NewScan}
+          >
+            <Text>
+              Rescan
+            </Text>
+          </Pressable>
+
+          <Text style={globalStyles.PromoText}>{promo}</Text>
+
+          <Pressable
+            onPress={()=>sendPromo(promo)}
+            style={globalStyles.SendButton}
+          >
+            <Text>
+              Accept Promo code
+            </Text>
+          </Pressable>
+
+        </View>
+      )
   }else{
 //    console.log("user", user);
     return (
