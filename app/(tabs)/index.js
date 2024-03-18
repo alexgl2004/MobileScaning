@@ -41,18 +41,13 @@ export default function HomePage() {
       <View style={globalStyles.container}>
         <Text>Camera permission is required</Text>
         <Pressable
-          title="Request permission"
-          onPress={requestPermission}
-          style={{
-            backgroundColor: "#fff",
-            height: 60,
-            width: 200,
-            borderRadius: 7,
-            color: "#000",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        />
+            onPress={requestPermission}
+            style={globalStyles.buttonScan}
+          >
+            <Text style={globalStyles.buttonText}>
+              Get access
+            </Text>
+        </Pressable>        
       </View>
     );
   }
