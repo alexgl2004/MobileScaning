@@ -15,7 +15,7 @@ export default function HomePage() {
   const [boolOutForPromo, setOutForPromo] = useState(false);
 
   const { user, setUserPromo, delUserPromo } = useContext(UserContext);
-  const header_var = (<Typography variant="heading">Book Order</Typography>);
+  const header_var = (<Typography variant="heading">Promo code</Typography>);
 
   useEffect(() => {
     if(user!=null){
@@ -85,31 +85,32 @@ export default function HomePage() {
 
     return (
       <View style={globalStyles.container}>
+          {header_var}
           {
             boolOutForPromo===true?(
-            <Text>
-                You have applied Promo Code now. If You want have another Promo You can:
+            <Text style={globalStyles.p}>
+                You have applied promo code. If You want have another promo code, You can:
             </Text>):''
           }
           <Pressable
             onPress={()=>setPromo('')}
-            style={globalStyles.button20}
+            style={globalStyles.buttonScan}
           >
-              <Text>
-                Scan new Promo code
+              <Text style={globalStyles.buttonText}>
+                Scan new
               </Text>
           </Pressable>
           {boolOutForPromo===true?(
             <>
-              <Text>
+              <Text style={globalStyles.p}>
                 Or:
               </Text>
               <Pressable
                   onPress={()=>delUserPromo()}
-                  style={globalStyles.button20}
+                  style={globalStyles.buttonCancel}
                 >
-                  <Text>
-                    Remove Promo code
+                  <Text style={globalStyles.buttonText}>
+                    Remove
                   </Text>
               </Pressable>
             </>):''
@@ -123,24 +124,30 @@ export default function HomePage() {
     
     return (
         <View style={globalStyles.container}>
-              
+          {header_var}    
           <Pressable
             onPress={()=>setPromo('')}
-            style={globalStyles.NewScan}
+            style={globalStyles.buttonScan}
           >
-            <Text>
+            <Text style={globalStyles.buttonText}>
               Rescan
             </Text>
           </Pressable>
 
-          <Text style={globalStyles.PromoText}>{promo}</Text>
+          <Text style={globalStyles.PromoText}>
+            🎉 Congratulation 🎉
+          </Text>
+          <Text style={globalStyles.p}>You have successfully received a promo code.</Text>
+          <Text style={globalStyles.p}>
+            If you would like to apply a promotional code to purchases in our store, please click the button below:
+          </Text>
 
           <Pressable
             onPress={()=>sendPromo(promo)}
-            style={globalStyles.SendButton}
+            style={globalStyles.buttonSend}
           >
-            <Text>
-              Accept Promo code
+            <Text style={globalStyles.buttonTextSend}>
+              Apply
             </Text>
           </Pressable>
 
@@ -150,15 +157,26 @@ export default function HomePage() {
 //    console.log("user", user);
     return (
       <View style={globalStyles.container}>
+        {header_var}
+        <View style={globalStyles.cameraView}>
         <CameraView style={globalStyles.camera} facing={facing} barcodeScannerSettings={{
           barcodeTypes: ["qr"],
         }} onBarcodeScanned={handlePromoCode}>
           <View style={globalStyles.buttonContainer}>
-            <TouchableOpacity style={globalStyles.button} onPress={toggleCameraFacing}>
-              <Text style={globalStyles.text}>Flip Camera</Text>
+            <TouchableOpacity style={globalStyles.buttonFlip} onPress={toggleCameraFacing}>
+              <Text style={globalStyles.textFlip}>Flip Camera</Text>
             </TouchableOpacity>
           </View>
         </CameraView>
+        </View>
+        <Pressable
+            onPress={()=>setPromo('none')}
+            style={globalStyles.buttonCancel}
+          >
+            <Text style={globalStyles.buttonText}>
+              Cancel scan
+            </Text>
+        </Pressable>
       </View>
     );
   }

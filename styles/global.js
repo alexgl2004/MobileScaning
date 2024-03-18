@@ -3,8 +3,17 @@ import { COLORS, FONTS } from "./constants";
 
 export const globalStyles = StyleSheet.create({
   camera: {
+    height:'100%',
+    width:'100%',
+  },
+  cameraView:{
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: COLORS.accent,
     height:'50%',
-    width:'50%'
+    width:'100%',
+    padding:10,
+    backgroundColor: '#000'
   },
   container: {
     flex: 1,
@@ -14,9 +23,21 @@ export const globalStyles = StyleSheet.create({
   },
   p: {
     fontSize: 18,
-    color: "#ddd",
+    color: "#ffffff",
     marginBottom: 8,
     fontFamily: FONTS.sansSerif,
+    width:"100%",
+    textAlign:"justify",
+    marginBottom:15
+  },
+  pCenter: {
+    fontSize: 14,
+    color: "#ffffff",
+    marginBottom: 0,
+    fontFamily: FONTS.sansSerif,
+    width:"100%",
+    textAlign:"center",
+    marginBottom:2
   },
   p2: {
     fontSize: 16,
@@ -94,46 +115,59 @@ export const globalStyles = StyleSheet.create({
     fontFamily: FONTS.sansSerif,
     fontSize: 18,
   },
-  buttonNotOrder: {
-    height:50, 
-    width:'50%',
+  buttonCancel:{
     alignSelf:"center",
-    backgroundColor: "#F17A41",
-    color: COLORS.dark,
-    padding: 0,
-    paddingTop: 14,
-    borderRadius: 6,
-    fontFamily: FONTS.sansSerif,
-    fontSize: 18,
-    marginTop: 20
+    borderWidth: 2,
+    borderColor: COLORS.cancel,
+    borderRadius: 10,
+    padding:18,
+    backgroundColor: COLORS.cancel,
+    margin:5,
+    marginTop:20
   },
-  buttonOrdered: {
-    height:50, 
-    width:'50%',
+  buttonScan:{
     alignSelf:"center",
-    backgroundColor: "transparent",
-    color: COLORS.dark,
-    padding: 0,
-    paddingTop: 14,
-    borderRadius: 6,
-    borderWidth:2,
-    borderColor:"#F17A41",
-    fontFamily: FONTS.sansSerif,
-    fontSize: 18,
-    marginTop: 20
-  }, 
-  buttonOrderText:{
-    alignSelf:"center",
-    fontSize: 18,
+    borderWidth: 2,
+    borderColor: COLORS.accent,
+    borderRadius: 10,
+    padding:18,
+    backgroundColor: COLORS.accent,
   },
-  buttonNotOrderText:{
+  buttonSend:{
     alignSelf:"center",
-    color: '#333',
-    fontSize: 18,
+    borderWidth: 2,
+    borderColor: COLORS.accept,
+    borderRadius: 10,
+    padding:18,
+    backgroundColor: COLORS.accept,
   },
-  buttonOrderedText:{
-    alignSelf:"center",
-    color: "#F17A41",
-    fontSize: 18,
-  }
+  buttonText:{
+    color:'#fff',
+    fontSize: 18,    
+  },
+  textFlip:{
+    color:'#fff',
+    fontSize: 12,
+    textAlign: "center",
+  },
+  buttonTextSend:{
+    color:'#fff',
+    fontSize: 25,
+  },
+  buttonFlip:{
+    borderWidth: 2,
+    borderColor: COLORS.dark,
+    borderRadius: 5,
+    padding:2,
+    backgroundColor: COLORS.dark,
+    width:100,
+    margin:2,
+  },
+  PromoText:{
+    color:'#fff',
+    fontSize: 25,
+    textAlign: "center",
+    marginTop: 20,
+    marginBottom: 20
+  },
 });

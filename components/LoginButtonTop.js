@@ -16,6 +16,7 @@ export function LoginButtonTop() {
           }}
           color={COLORS.accent}
           title={user==null?"Login":"Logout"}
+          style={{ borderRadius: 5 }}
         />
       </View>
     )
