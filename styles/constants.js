@@ -1,9 +1,11 @@
 export const COLORS = {
   primary: "#98C1D9",
-  accent: "#F26430",
+  accent: "#60C5F1",
   dark: "#2A2D34",
   light: "#FAFFFD",
   grey: "#999999",
+  cancel: "#ED1C24",
+  accept: "#22B14C"
 };
 
 export const FONTS = {

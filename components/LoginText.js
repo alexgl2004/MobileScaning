@@ -7,7 +7,7 @@ import { COLORS } from "../styles/constants";
 export function LoginText() {
     return (<>
             <Typography>
-              You must login before ordering book
+              You must login before SCAN
             </Typography>
             <View style={{ paddingRight: 12 }}>
               <Pressable

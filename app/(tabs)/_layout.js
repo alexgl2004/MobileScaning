@@ -32,9 +32,18 @@ export default function MainTabs() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Scan",
           tabBarIcon: ({ color }) => {
             return <Ionicons name="home-outline" size={24} color={color} />;
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="info"
+        options={{
+          title: "Information",
+          tabBarIcon: ({ color }) => {
+            return <Ionicons name="document-outline" size={24} color={color} />;
           },
         }}
       />

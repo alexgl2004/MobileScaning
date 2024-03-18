@@ -30,6 +30,9 @@ export default function Login() {
       {user?
          (
           <>
+            <Text style={globalStyles.pCenter}>
+              Are you shure to make logout?
+            </Text>
             <Button
               onPress={() => {
                 logout();
@@ -44,6 +47,9 @@ export default function Login() {
          ):
          (<>
           <Text style={globalStyles.h1}>Login</Text>
+          <Text style={globalStyles.pCenter}>
+            You can login with your E-mail or Name
+          </Text>
           <TextInput
             placeholder="User name"
             onChangeText={(text) => {
