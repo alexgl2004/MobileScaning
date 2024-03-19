@@ -1,10 +1,9 @@
-import { Text, View, ScrollView, Button, Pressable, TouchableOpacity } from "react-native";
+import { Text, View, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import { CameraView, useCameraPermissions } from 'expo-camera/next';
-//import { Link, router } from "expo-router";
+import { useContext, useState, useEffect } from "react";
 import { globalStyles } from "../../styles/global";
 import { Typography } from "../../components/Typography";
 import { LoginText } from "../../components/LoginText";
-import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 
 export default function HomePage() {
@@ -40,13 +39,8 @@ export default function HomePage() {
     return (
       <View style={globalStyles.container}>
         <Text>Camera permission is required</Text>
-        <Pressable
-            onPress={requestPermission}
-            style={globalStyles.buttonScan}
-          >
-            <Text style={globalStyles.buttonText}>
-              Get access
-            </Text>
+        <Pressable onPress={requestPermission} style={globalStyles.buttonScan}>
+          <Text style={globalStyles.buttonText}>Get access</Text>
         </Pressable>        
       </View>
     );
@@ -57,14 +51,12 @@ export default function HomePage() {
   }
 
   function handlePromoCode(data){
-    //console.log(data.data);
     if(data.data){
       setPromo(data.data);
     }    
   }
 
   function sendPromo(promo){
-    //alert(promo)
     setUserPromo(promo)
   }
 
@@ -87,32 +79,23 @@ export default function HomePage() {
                 You have applied promo code. If You want have another promo code, You can:
             </Text>):''
           }
-          <Pressable
-            onPress={()=>setPromo('')}
-            style={globalStyles.buttonScan}
-          >
-              <Text style={globalStyles.buttonText}>
-                Scan new
-              </Text>
+          <Pressable onPress={()=>setPromo('')} style={globalStyles.buttonScan}>
+            <Text style={globalStyles.buttonText}>Scan new</Text>
           </Pressable>
           {boolOutForPromo===true?(
             <>
               <Text style={globalStyles.p}>
                 Or:
               </Text>
-              <Pressable
-                  onPress={()=>delUserPromo()}
-                  style={globalStyles.buttonCancel}
-                >
-                  <Text style={globalStyles.buttonText}>
-                    Remove
-                  </Text>
+              <Pressable onPress={()=>delUserPromo()} style={globalStyles.buttonCancel}>
+                <Text style={globalStyles.buttonText}>Remove</Text>
               </Pressable>
             </>):''
           }
 
       </View>    
     )
+
   }else if(promo!=''){
 
 //    console.log(promo+100)
@@ -120,13 +103,8 @@ export default function HomePage() {
     return (
         <View style={globalStyles.container}>
           {header_var}    
-          <Pressable
-            onPress={()=>setPromo('')}
-            style={globalStyles.buttonScan}
-          >
-            <Text style={globalStyles.buttonText}>
-              Rescan
-            </Text>
+          <Pressable onPress={()=>setPromo('')} style={globalStyles.buttonScan}>
+            <Text style={globalStyles.buttonText}>Rescan</Text>
           </Pressable>
 
           <Text style={globalStyles.PromoText}>
@@ -137,18 +115,14 @@ export default function HomePage() {
             If you would like to apply a promotional code to purchases in our store, please click the button below:
           </Text>
 
-          <Pressable
-            onPress={()=>sendPromo(promo)}
-            style={globalStyles.buttonSend}
-          >
-            <Text style={globalStyles.buttonTextSend}>
-              Apply
-            </Text>
+          <Pressable onPress={()=>sendPromo(promo)} style={globalStyles.buttonSend}>
+            <Text style={globalStyles.buttonTextSend}>Apply</Text>
           </Pressable>
-
         </View>
       )
+
   }else{
+
 //    console.log("user", user);
     return (
       <View style={globalStyles.container}>
@@ -164,20 +138,10 @@ export default function HomePage() {
           </View>
         </CameraView>
         </View>
-        <Pressable
-            onPress={()=>setPromo('none')}
-            style={globalStyles.buttonCancel}
-          >
-            <Text style={globalStyles.buttonText}>
-              Cancel scan
-            </Text>
+        <Pressable onPress={()=>setPromo('none')} style={globalStyles.buttonCancel}>
+          <Text style={globalStyles.buttonText}>Cancel scan</Text>
         </Pressable>
       </View>
     );
   }
 }
-/*
-            <Link asChild style={globalStyles.link} href="actors">
-                <Button color={COLORS.accent} title="Select Author" />
-            </Link>
-*/            
